@@ -1,0 +1,3 @@
+Nom_fichier;Chemin_complet;Date_creation;Date_modification;Taille_octets
+fichier1.txt;test_source/fichier1.txt;2025-08-18 09:53:56;2025-08-18 09:53:56;20
+fichier2.txt;test_source/sous_repertoire/fichier2.txt;2025-08-18 09:53:56;2025-08-18 09:53:56;45

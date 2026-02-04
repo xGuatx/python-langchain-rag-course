@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistant RAG Générique - Séance 5</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <i class="fas fa-robot"></i>
+                    <h1>Assistant RAG Générique</h1>
+                    <span class="version">Séance 5</span>
+                </div>
+                <div class="header-actions">
+                    <button id="newConversationBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Nouvelle conversation
+                    </button>
+                    <button id="statsBtn" class="btn btn-outline">
+                        <i class="fas fa-chart-bar"></i>
+                        Statistiques
+                    </button>
+                    <button id="historyBtn" class="btn btn-outline">
+                        <i class="fas fa-history"></i>
+                        Historique
+                    </button>
+                    <button id="clearBtn" class="btn btn-outline">
+                        <i class="fas fa-trash"></i>
+                        Effacer
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-lightbulb"></i> Questions d'exemple</h3>
+                    <div id="exampleQuestions" class="example-questions">
+                        <!-- Chargé dynamiquement -->
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-cubes"></i> Documents disponibles</h3>
+                    <div id="Modules" class="-modules">
+                        <!-- Chargé dynamiquement -->
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-info-circle"></i> État du système</h3>
+                    <div id="systemStatus" class="system-status">
+                        <div class="status-item">
+                            <span class="status-label">RAG:</span>
+                            <span id="ragStatus" class="status-value">Vérification...</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Base:</span>
+                            <span id="dbStatus" class="status-value">Vérification...</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Chat Area -->
+            <div class="chat-container">
+                <div class="welcome-message" id="welcomeMessage">
+                    <div class="welcome-content">
+                        <i class="fas fa-robot welcome-icon"></i>
+                        <h2>Bienvenue dans l'Assistant RAG Générique</h2>
+                        <p>Posez vos questions sur la documentation fournie et obtenez des réponses basées sur la base de connaissances.</p>
+                        <div class="welcome-features">
+                            <div class="feature">
+                                <i class="fas fa-search"></i>
+                                <span>Recherche sémantique</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-brain"></i>
+                                <span>IA Codestral</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-database"></i>
+                                <span>Base vectorielle</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Messages de conversation -->
+                </div>
+
+                <div class="chat-input-container">
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            id="questionInput" 
+                            placeholder="Posez votre question sur la documentation..."
+                            autocomplete="off"
+                        >
+                        <button id="sendBtn" class="send-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="input-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="includeSources" checked>
+                            <span class="checkmark"></span>
+                            Inclure les sources
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="includeConversation" checked>
+                            <span class="checkmark"></span>
+                            Contexte de conversation
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Modal Statistiques -->
+    <div id="statsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-chart-bar"></i> Statistiques du système</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="statsContent">
+                    <!-- Contenu des statistiques -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Historique -->
+    <div id="historyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-history"></i> Historique de conversation</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="historyContent">
+                    <!-- Contenu de l'historique -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-robot fa-spin"></i>
+            <p>Traitement en cours...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container">
+        <!-- Notifications -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+# --- Bases SQLite & fichiers d'état DB ---
+# --- Caches/tests/outils Python ---
+# --- Certificats/cles par sécurité ---
+# --- Environnements/pyenv/éditeurs ---
+# --- OS divers ---
+# Build
+# Certificates
+# Credentials et secrets
+# Docker
+# IDE
+# IDEs
+# Log
+# Logs
+# Node
+# OS
+# Python
+# Sensitive files
+# Temporary
+# Virtual environments
+
+!RAG/**/rag_web/src/database/.keep
+*$py.class
+*.code-workspace
+*.crt
+*.db
+*.db-journal
+*.egg
+*.egg-info/
+*.key
+*.log
+*.p12
+*.pem
+*.py[cod]
+*.so
+*.sqlite
+*.sqlite3
+*.swo
+*.swp
+*.temp
+*.tmp
+*~
+.DS_Store
+.DS_Store?
+.Python
+.Spotlight-V100
+.Trashes
+._*
+.cache-*
+.cache/
+.coverage*
+.credentials.json
+.dockerignore
+.eggs/
+.env
+.env.*.local
+.env.local
+.history
+.hypothesis/
+.idea/
+.installed.cfg
+.mdpWSL
+.mdpWSl
+.mypy_cache/
+.nox/
+.passwords.txt
+.pgpass
+.pnpm-debug.log*
+.pytest_cache/
+.python-version
+.pytype/
+.ruff_cache/
+.tox/
+.venv
+.vscode/
+Desktop.ini
+ENV/
+RAG/**/Corpus/Corpus documentaire/*
+RAG/**/conversation_*session*.json
+RAG/**/conversation_memory.json
+RAG/**/conversation_sessions.json
+RAG/**/logs/*
+RAG/**/migrated_*.json
+RAG/**/rag_web/src/database/*
+RAG/**/sessions/*.json
+Thumbs.db
+__pycache__/
+auth.json
+build/
+certs/
+develop-eggs/
+dist/
+downloads/
+eggs/
+ehthumbs.db
+env.bak/
+env/
+htmlcov/
+id_ed25519
+id_rsa
+lib/
+lib64/
+logs/
+node_modules/
+npm-debug.log*
+out/
+parts/
+sdist/
+seance*_test_report.json
+target/
+var/
+venv-*/
+venv.bak/
+venv/
+wheels/
+yarn-debug.log*
+yarn-error.log*
+# Claude Code
+.claude/
+.claude.json
